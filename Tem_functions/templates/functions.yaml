@@ -1,8 +1,15 @@
+{{- define "testchart.labels" }}
+  labels:
+    generator: helm
+    date: {{ now | htmlDate }}
+{{- end }}
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-configmap
-  lables:
+  # {{ template "testchart.labels" }}
+  {{- template "testchart.labels" }}
 data:
   myvalue: "Hello World"
   who: {{ required "A valid .Values.who entry required!" .Values.who }}
